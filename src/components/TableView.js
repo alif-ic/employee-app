@@ -4,6 +4,7 @@ import React, {Fragment} from "react"
 class TableView extends React.Component {
     constructor(props) {
         super(props);
+        console.log(this.props);
     }
     render() {
         return (
@@ -24,7 +25,7 @@ class TableView extends React.Component {
                                 <button>Edit</button>
                             </th>
                             <th>
-                                <button>Delete</button>
+                                <button onClick={(event) => this.props.deleteThis(event, index)}>Delete</button>
                             </th>
                         </tr>
                     ))}

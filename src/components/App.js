@@ -21,7 +21,12 @@ class App extends React.Component{
                 },
             ],
         };
-        onDelete = onDelete.bind(this)
+        //onDelete = this.onDelete.bind(this);
+        this.onDelete = (event, index) => {
+            this.setState({
+                employee: this.state.employee.filter((item, itemIndex) => ( index != itemIndex )),
+            });
+        };
     }
 
     render(){
@@ -29,7 +34,7 @@ class App extends React.Component{
             <React.Fragment>
                 <h1>List View</h1>
                 <table>
-                    <TableView employee={ this.state.employee } />
+                    <TableView deleteThis={this.onDelete} employee={ this.state.employee } />
                 </table>
             </React.Fragment>
         );
