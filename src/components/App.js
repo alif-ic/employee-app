@@ -2,9 +2,9 @@ import React from "react"
 import TableView from "./TableView"
 import EmployeeForm from "./EmployeeForm"
 
-class App extends React.Component{
+class App extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             current: "Submit",
@@ -28,26 +28,26 @@ class App extends React.Component{
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onDelete(event, index){
+    onDelete(event, index) {
         this.setState({
-            employee: this.state.employee.filter((item, itemIndex) => ( index != itemIndex )),
+            employee: this.state.employee.filter((item, itemIndex) => (index != itemIndex)),
         });
     };
 
-    onSubmit(event, name, age){
-        this.setState({employee: [...this.state.employee, {name: name, age: age}]});
+    onSubmit(name, age) {
+        this.setState({ employee: [...this.state.employee, { name: name, age: age }] });
     };
 
-    render(){
+    render() {
         return (
             <React.Fragment>
                 <h1>Employee Management</h1>
                 <table className="table table-bordered">
-                    <TableView onUpdateTry={this.edit} deleteThis={this.onDelete} employee={ this.state.employee } />
+                    <TableView onUpdateTry={this.edit} deleteThis={this.onDelete} employee={this.state.employee} />
                 </table>
                 <hr />
 
-                <EmployeeForm currentEmp={this.state.currentEmp} submitThis={this.onSubmit}  currentButtonName={this.state.current} />
+                <EmployeeForm currentEmp={this.state.currentEmp} submitThis={this.onSubmit} currentButtonName={this.state.current} />
 
             </React.Fragment>
         );

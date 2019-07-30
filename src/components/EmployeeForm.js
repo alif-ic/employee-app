@@ -1,4 +1,5 @@
-import React, {Fragment} from "react"
+import React, { Fragment } from "react"
+import { runInThisContext } from "vm";
 
 
 class EmployeeForm extends React.Component {
@@ -9,18 +10,18 @@ class EmployeeForm extends React.Component {
             age: '',
         };
         this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.onAgeChange = this.onAgeChange.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
-    onChangeHandler(event){
+    submit(event, name, age) {
+        if (this.props.submitThis) {
+            this.props.submitThis(name, age);
+        }
+    }
+
+    onChangeHandler(event) {
         this.setState({
             [event.target.name]: event.target.value
-        });
-    }
-
-    onAgeChange(event){
-        this.setState({
-            age: event.target.value
         });
     }
 
@@ -37,7 +38,7 @@ class EmployeeForm extends React.Component {
                     <input min="0" max="100" onChange={(event) => this.onChangeHandler(event)} value={this.state.age} autoComplete="off" name="age" type="number" className="form-control" id="exampleFormControlInput2" placeholder="You age" />
                 </div>
 
-                <button onClick={(event) => this.props.submitThis(event, this.state.name, this.state.age)} type="button" className="btn btn-success btn-lg">{this.props.currentButtonName}</button>
+                <button onClick={(event) => this.submit(event, this.state.name, this.state.age)} type="button" className="btn btn-success btn-lg">{this.props.currentButtonName}</button>
             </form>
         );
     }

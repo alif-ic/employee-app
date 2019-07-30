@@ -15,8 +15,25 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'
                 }
-            }
-        ]
+            },
+            {
+                test: /\.(css|scss)/,
+                use: [
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+            },
+        ],
     },
     plugins: [
         new WebPackHtmlPlugin({

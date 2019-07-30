@@ -17,7 +17,7 @@ class TableView extends React.Component {
                 </thead>
                 <tbody>
                     {this.props.employee.map((item, index) => (
-                        <tr key={index}>
+                        <tr className="cursor" key={index}>
                             <td>{item.name}</td>
                             <td>{item.age}</td>
                             <th className="text-center">
