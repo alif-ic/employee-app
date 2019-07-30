@@ -24,16 +24,19 @@ class App extends React.Component{
             ],
             currentEmp: {},
         };
-        this.onDelete = (event, index) => {
-            this.setState({
-                employee: this.state.employee.filter((item, itemIndex) => ( index != itemIndex )),
-            });
-        };
-
-        this.onSubmit = (event, name, age) => {
-            this.setState({employee: [...this.state.employee, {name: name, age: age}]});
-        };
+        this.onDelete = this.onDelete.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
+
+    onDelete(event, index){
+        this.setState({
+            employee: this.state.employee.filter((item, itemIndex) => ( index != itemIndex )),
+        });
+    };
+
+    onSubmit(event, name, age){
+        this.setState({employee: [...this.state.employee, {name: name, age: age}]});
+    };
 
     render(){
         return (
@@ -44,7 +47,7 @@ class App extends React.Component{
                 </table>
                 <hr />
 
-                <EmployeeForm submitThis={this.onSubmit}  currentButtonName={this.state.current} />
+                <EmployeeForm currentEmp={this.state.currentEmp} submitThis={this.onSubmit}  currentButtonName={this.state.current} />
 
             </React.Fragment>
         );
