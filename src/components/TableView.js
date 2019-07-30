@@ -21,7 +21,7 @@ class TableView extends React.Component {
                             <td>{item.name}</td>
                             <td>{item.age}</td>
                             <th className="text-center">
-                                <button>Edit</button>
+                                <button onClick={(event) => this.props.onUpdateTry(event, index)}>Edit</button>
                             </th>
                             <th className="text-center">
                                 <button onClick={(event) => this.props.deleteThis(event, index)}>Delete</button>
