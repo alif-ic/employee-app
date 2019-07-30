@@ -1,5 +1,6 @@
 import React from "react"
 import TableView from "./TableView"
+import EmployeeForm from "./EmployeeForm"
 
 class App extends React.Component{
 
@@ -32,10 +33,14 @@ class App extends React.Component{
     render(){
         return (
             <React.Fragment>
-                <h1>List View</h1>
-                <table>
+                <h1>Employee Management</h1>
+                <table className="table table-bordered">
                     <TableView deleteThis={this.onDelete} employee={ this.state.employee } />
                 </table>
+                <hr />
+
+                <EmployeeForm />
+
             </React.Fragment>
         );
     }

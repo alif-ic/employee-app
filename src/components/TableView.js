@@ -4,16 +4,15 @@ import React, {Fragment} from "react"
 class TableView extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
     }
     render() {
         return (
             <Fragment>
-                <thead>
+                <thead className="thead-dark">
                     <tr>
-                        <th>Name</th>
+                        <th scope="col">Name</th>
                         <th>Age</th>
-                        <th colSpan="2">Action</th>
+                        <th className="text-center" colSpan="2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,10 +20,10 @@ class TableView extends React.Component {
                         <tr key={index}>
                             <td>{item.name}</td>
                             <td>{item.age}</td>
-                            <th>
+                            <th className="text-center">
                                 <button>Edit</button>
                             </th>
-                            <th>
+                            <th className="text-center">
                                 <button onClick={(event) => this.props.deleteThis(event, index)}>Delete</button>
                             </th>
                         </tr>

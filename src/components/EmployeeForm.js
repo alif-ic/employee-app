@@ -1,22 +1,27 @@
-import react, {Fragment} from "react"
+import React, {Fragment} from "react"
 
 
-class EmployeeForm extends Component {
+class EmployeeForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {  };
     }
     render() {
         return (
-            <form method="POST">
-                <label for="name">Name</label>
-                <input value={this.props.name} type="text" name="name" placeholder="Name of the employee" />
+            <form>
+                <div className="form-group">
+                    <label htmlFor="exampleFormControlInput1">Name</label>
+                    <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Alif Jahan" />
+                </div>
 
-                <label for="name">Age</label>
-                <input value={this.props.age} type="number" name="age" placeholder="Age of the employee" />
+                <div className="form-group">
+                    <label htmlFor="exampleFormControlInput1">Age</label>
+                    <input type="number" className="form-control" id="exampleFormControlInput1" placeholder="You age" />
+                </div>
 
-                <button onClick={(event) => this.props.formAction(event, index, this.props.name, this.props.age)}>Submit</button>
+                <button type="button" className="btn btn-success btn-lg">Submit</button>
             </form>
+
         );
     }
 }
