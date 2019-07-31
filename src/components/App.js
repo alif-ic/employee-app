@@ -26,6 +26,7 @@ class App extends React.Component {
         };
         this.onDelete = this.onDelete.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.setIndex = this.setIndex.bind(this)
     }
 
     onDelete(event, index) {
@@ -34,21 +35,52 @@ class App extends React.Component {
         });
     };
 
-    onSubmit(name, age) {
-        this.setState({ employee: [...this.state.employee, { name: name, age: age }] });
+    onSubmit(name, age,  index=null) {
+        if(!index && self.state.current == 'Submit'){
+            this.setState({ employee: [...this.state.employee, { name: name, age: age }] });
+        }
+        else{
+            console.log(1);
+        }
     };
+
+    setIndex(index){
+        var emp = this.state.employee[index];
+        emp.index = index;
+        this.setState({
+            currentEmp: emp,
+            current: 'Update'
+        });
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.currentEmp != this.props.currentEmp){
+            var emp = this.state.employee[index];
+            emp.index = index;
+            this.setState({
+                currentEmp: emp,
+                current: 'Update'
+            });
+        }
+    }
 
     render() {
         return (
             <React.Fragment>
                 <h1>Employee Management</h1>
                 <table className="table table-bordered">
-                    <TableView onUpdateTry={this.edit} deleteThis={this.onDelete} employee={this.state.employee} />
+                    <TableView
+                        onUpdateTry={this.edit}
+                        deleteThis={this.onDelete}
+                        editThis={this.setIndex}
+                        employee={this.state.employee} />
                 </table>
                 <hr />
 
-                <EmployeeForm currentEmp={this.state.currentEmp} submitThis={this.onSubmit} currentButtonName={this.state.current} />
-
+                <EmployeeForm
+                    currentEmp={this.state.currentEmp}
+                    submitThis={this.onSubmit}
+                    currentButtonName={this.state.current} />
             </React.Fragment>
         );
     }
