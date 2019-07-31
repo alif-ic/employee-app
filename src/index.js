@@ -15,4 +15,4 @@ const route = (<Router>
     </Switch>
 </Router>);
 
-ReactDOM.render(route, document.getElementById("app"))
+ReactDOM.render(<App />, document.getElementById("app"))
