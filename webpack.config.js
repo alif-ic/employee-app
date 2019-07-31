@@ -17,8 +17,14 @@ module.exports = {
                 }
             },
             {
-                test: /\.(css|scss)/,
+                test: /\.scss$/,
                 use: [
+                    {
+                        loader: 'style-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    },
                     {
                         loader: 'css-loader',
                         options: {
@@ -30,7 +36,7 @@ module.exports = {
                         options: {
                             sourceMap: true
                         }
-                    }
+                    },
                 ]
             },
         ],

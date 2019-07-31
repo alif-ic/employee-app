@@ -3,6 +3,8 @@ import TableView from "./TableView"
 import EmployeeForm from "./EmployeeForm"
 import Nav from "./Nav"
 
+import style from "./../style.scss"
+
 class App extends React.Component {
 
     constructor(props) {
@@ -83,7 +85,7 @@ class App extends React.Component {
                     submitThis={this.onSubmit}
                     currentButtonName={this.state.current} />
 
-                <button onClick={this.goback}>Go Back</button>
+                <button className={style.silver} onClick={this.goback}>Go Back</button>
             </React.Fragment>
         );
     }

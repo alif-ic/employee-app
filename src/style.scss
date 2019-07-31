@@ -1,3 +1,5 @@
-.cursor{
-    cursor: pointer;
+$defaultBackgroundColor: rgb(127, 127, 127);
+
+.silver{
+    background-color: $defaultBackgroundColor;
 }
