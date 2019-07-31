@@ -1,6 +1,7 @@
 import React from "react"
 import TableView from "./TableView"
 import EmployeeForm from "./EmployeeForm"
+import Nav from "./Nav"
 
 class App extends React.Component {
 
@@ -26,7 +27,7 @@ class App extends React.Component {
         };
         this.onDelete = this.onDelete.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.setIndex = this.setIndex.bind(this)
+        this.setIndex = this.setIndex.bind(this);
     }
 
     onDelete(event, index) {
@@ -35,12 +36,18 @@ class App extends React.Component {
         });
     };
 
-    onSubmit(name, age,  index=null) {
-        if(!index && self.state.current == 'Submit'){
+    onSubmit(name, age, index=null) {
+        if(!index && this.state.current == 'Submit'){
             this.setState({ employee: [...this.state.employee, { name: name, age: age }] });
         }
-        else{
-            console.log(1);
+        else if(index && this.state.current == 'Update'){
+            var emp = this.state.employee;
+            emp[index].name = name;
+            emp[index].age = age;
+            this.setState({
+                employee: emp,
+                current: 'Submit'
+            });
         }
     };
 
@@ -53,21 +60,11 @@ class App extends React.Component {
         });
     }
 
-    componentDidUpdate(prevProps){
-        if(prevProps.currentEmp != this.props.currentEmp){
-            var emp = this.state.employee[index];
-            emp.index = index;
-            this.setState({
-                currentEmp: emp,
-                current: 'Update'
-            });
-        }
-    }
-
     render() {
         return (
             <React.Fragment>
-                <h1>Employee Management</h1>
+                <Nav />
+                <h1>Employee</h1>
                 <table className="table table-bordered">
                     <TableView
                         onUpdateTry={this.edit}

@@ -1,21 +1,62 @@
 import React, { Fragment } from "react"
-import { runInThisContext } from "vm";
 
 
 class EmployeeForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            age: '',
+            index: this.props.currentEmp.index || null,
+            name: this.props.currentEmp.name || '',
+            age: this.props.currentEmp.age || '',
+            error: {
+                name: 'Unknown',
+                desc: 'You have an error!'
+            },
+            nameError:  "We'll never share your email with anyone else.",
         };
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.submit = this.submit.bind(this);
+        this.validator = this.validator.bind(this);
     }
 
-    submit(event, name, age) {
+    validator(param){
+        if(param && param.toString().replace(/\s/g,'')){
+            return true;
+        }
+        return false;
+    }
+
+    submit(event, name, age, index) {
+        event.preventDefault();
+        if (!this.validator(name)){
+            this.setState({
+                error: {
+                    name: 'nameError',
+                    desc: 'Please put a valid name'
+                }
+            });
+            return;
+        }
+        if (!this.validator(age) || parseInt(age) <= 0 || parseInt(age) > 100){
+            this.setState({
+                error: {
+                    name: 'ageError',
+                    desc: 'Please put a valid age'
+                }
+            });
+            return;
+        }
         if (this.props.submitThis) {
-            this.props.submitThis(name, age);
+            this.props.submitThis(name, age, index);
+            this.setState({
+                index: null,
+                name: '',
+                age: '',
+                error: {
+                    name: 'Unknown',
+                    desc: 'You have an error!'
+                }
+            });
         }
     }
 
@@ -24,10 +65,19 @@ class EmployeeForm extends React.Component {
             [event.target.name]: event.target.value
         });
     }
+    componentDidUpdate(prevProps){
+        if(prevProps.currentEmp != this.props.currentEmp){
+            this.setState({
+                index: this.props.currentEmp.index,
+                name: this.props.currentEmp.name,
+                age: this.props.currentEmp.age,
+            });
+        }
+    }
 
     render() {
         return (
-            <form>
+            <form onSubmit={this.submit}>
                 <div className="form-group">
                     <label htmlFor="exampleFormControlInput1">Name</label>
                     <input
@@ -39,6 +89,9 @@ class EmployeeForm extends React.Component {
                         className="form-control"
                         id="exampleFormControlInput1"
                         placeholder="Alif Jahan" />
+                    <small id="exampleFormControlInput1" className="form-text text-muted">
+                        { this.state.error.name == 'nameError' && this.state.error.desc }
+                    </small>
                 </div>
 
                 <div className="form-group">
@@ -54,14 +107,16 @@ class EmployeeForm extends React.Component {
                         className="form-control"
                         id="exampleFormControlInput2"
                         placeholder="You age" />
+                    <small id="exampleFormControlInput2" className="form-text text-muted">
+                        { this.state.error.name == 'ageError' && this.state.error.desc }
+                    </small>
                 </div>
 
-                <button
-                    onClick={(event) => this.submit(event, this.state.name, this.state.age)}
-                    type="button"
-                    className="btn btn-success btn-lg">
-                    {this.props.currentButtonName}
-                </button>
+                <input
+                    onClick={(event) => this.submit(event, this.state.name, this.state.age, this.state.index)}
+                    type="submit"
+                    className="btn btn-success btn-lg"
+                    value={this.props.currentButtonName} />
             </form>
         );
     }
