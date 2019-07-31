@@ -5,6 +5,10 @@ class Contacts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {  };
+        this.goback = this.goback.bind(this);
+    }
+    goback(event){
+        this.props.history.push('/home');
     }
     render() {
         return (
@@ -15,7 +19,8 @@ class Contacts extends React.Component {
                     target="_top">
                     Send Mail
                 </a>
-                <a href="#back" target="_top">Go Back</a>
+                &nbsp;&nbsp;&nbsp;
+                <button onClick={this.goback}>Go Back</button>
             </React.Fragment>
         );
     }

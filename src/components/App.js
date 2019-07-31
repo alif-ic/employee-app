@@ -28,6 +28,10 @@ class App extends React.Component {
         this.onDelete = this.onDelete.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.setIndex = this.setIndex.bind(this);
+        this.goback = this.goback.bind(this);
+    }
+    goback(event){
+        this.props.history.push('/home');
     }
 
     onDelete(event, index) {
@@ -78,6 +82,8 @@ class App extends React.Component {
                     currentEmp={this.state.currentEmp}
                     submitThis={this.onSubmit}
                     currentButtonName={this.state.current} />
+
+                <button onClick={this.goback}>Go Back</button>
             </React.Fragment>
         );
     }
