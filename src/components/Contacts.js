@@ -1,6 +1,7 @@
 import React from "react"
+import Nav from "./Nav";
 
-class Contacts extends Component {
+class Contacts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {  };
@@ -8,6 +9,7 @@ class Contacts extends Component {
     render() {
         return (
             <React.Fragment>
+                <Nav />
                 <a
                     href="mailto:someone@example.com?Subject=Hello%20again"
                     target="_top">
