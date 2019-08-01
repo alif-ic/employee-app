@@ -5,6 +5,10 @@ class TableView extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            employee: this.props.employee
+        };
+
         this.onDelete = this.onDelete.bind(this);
         this.onEdit = this.onEdit.bind(this);
     }
@@ -20,6 +24,14 @@ class TableView extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.employee != this.props.employee){
+            this.setState({
+                employee: this.props.employee
+            });
+        }
+    }
+
     render() {
         return (
             <Fragment>
@@ -31,7 +43,7 @@ class TableView extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.employee.map((item, index) => (
+                    {this.state.employee.map((item, index) => (
                         <tr key={index}>
                             <td>{item.name}</td>
                             <td>{item.age}</td>

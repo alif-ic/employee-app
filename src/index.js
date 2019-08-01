@@ -6,6 +6,8 @@ import Home from "./components/Home"
 import Contacts from "./components/Contacts";
 import App from "./components/App";
 
+import "./style.scss"
+
 const route = (<Router>
     <Switch>
         <Route exact component={Home} path="/"></Route>

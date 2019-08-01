@@ -1,5 +1,10 @@
 $defaultBackgroundColor: rgb(127, 127, 127);
+$buttonMargin: 20px;
 
 .silver{
     background-color: $defaultBackgroundColor;
+}
+
+button.mar{
+    margin: $buttonMargin;
 }

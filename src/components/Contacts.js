@@ -1,6 +1,5 @@
 import React from "react"
 import Nav from "./Nav"
-import style from  "./../style.scss"
 
 class Contacts extends React.Component {
     constructor(props) {
@@ -20,8 +19,7 @@ class Contacts extends React.Component {
                     target="_top">
                     Send Mail
                 </a>
-                &nbsp;&nbsp;&nbsp;
-                <button className={style.silver} onClick={this.goback}>Go Back</button>
+                <button className="silver mar" onClick={this.goback}>Go Back</button>
             </React.Fragment>
         );
     }
