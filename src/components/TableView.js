@@ -1,4 +1,7 @@
 import React, {Fragment} from "react"
+import { connect } from "react-redux"
+import { EmployeeReducer, GET_EMPLOYEE } from "./Redux/Reducers/EmployeeReducer"
+import { getEmployee } from "./Redux/Actions/EmployeeActions"
 
 
 class TableView extends React.Component {
@@ -43,7 +46,7 @@ class TableView extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.employee.map((item, index) => (
+                    {this.props.employees.map((item, index) => (
                         <tr key={index}>
                             <td>{item.name}</td>
                             <td>{item.age}</td>
@@ -67,4 +70,10 @@ class TableView extends React.Component {
     }
 }
 
-export default TableView;
+const mapToProps = (state, props) => {
+    return {
+        employees: state.employees
+    };
+}
+
+export default connect(mapToProps)(TableView);
