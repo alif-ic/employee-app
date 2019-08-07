@@ -1,5 +1,8 @@
 import React, { Fragment } from "react"
 
+import { connect } from "react-redux"
+
+import { getEmployee } from "../Actions/EmployeeActions"
 
 class TableView extends React.Component {
     constructor(props) {
@@ -11,6 +14,20 @@ class TableView extends React.Component {
 
         this.onDelete = this.onDelete.bind(this);
         this.onEdit = this.onEdit.bind(this);
+
+        // console.log(
+        //     this.props.getEmployee()
+        // );
+        // theStore.dispatch(getEmployee);
+        // const emp = this.props.getEmployee();
+        // console.log(emp);
+        // const t = this.props.dispatch({
+        //     type: 'GET_EMPLOYEE',
+        //     action: [1, 2, 3, 4, 54, 5]
+        // });
+        console.log(this.props.employees);
+        console.log(this.props.getEmployee());
+
     }
 
     onDelete(event, index){
@@ -43,7 +60,7 @@ class TableView extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.employee.map((item, index) => (
+                    {this.props.employee.map((item, index) => (
                         <tr key={index}>
                             <td>{item.name}</td>
                             <td>{item.age}</td>
@@ -67,4 +84,14 @@ class TableView extends React.Component {
     }
 }
 
-export default TableView;
+const mapDispatchToProps = {
+    getEmployee
+}
+
+const mapStateToProps = (state) => {
+    return {
+        employees: state.employees
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableView);
